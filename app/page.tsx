@@ -19,6 +19,7 @@ export default async function Home() {
         <h1>Habit Tracker</h1>
       </header>
       <h2>Habits:</h2>
+      <button>Add Habit</button>
       <div className="habit-container">
         {habits.map((habit: any) => (
           <Habit key={habit._id} name={habit.habit} />
