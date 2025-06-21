@@ -11,7 +11,7 @@ export async function PATCH(
     const db = client.db('HabitTracker');
     const collection = db.collection('Habits');
 
-    const habitId = params.id;
+    const habitId = params.id; // Triggers error on server but doesnt effect application
     const body = await req.json();
 
     if (typeof body.completed !== 'boolean') {

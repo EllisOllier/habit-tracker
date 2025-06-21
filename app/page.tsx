@@ -8,7 +8,7 @@ import XPLevel from '@/components/XPLevel';
 export default function Home() {
   const [habits, setHabits] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [xp, setXp] = useState(10);
+  const [xp, setXp] = useState(0);
 
   const fetchHabits = async () => {
     try {
@@ -25,6 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchHabits();
+    setXp(100);
   }, []);
 
   // Function to remove deleted habit from state

@@ -11,7 +11,7 @@ export default function XPLevel({ givenXp }: HabitProps) {
 
   return (
     <div>
-      <p>{xp}</p>
+      <p>Current XP: {xp}</p>
     </div>
   );
 }

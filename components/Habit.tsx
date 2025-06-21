@@ -38,7 +38,7 @@ export default function Habit({ id, name, completed, onDelete }: HabitProps) {
 
   // On change, trigger an xp push to the XPLevel component
   return (
-    <div>
+    <div className=''>
       <label>
         <input type="checkbox" checked={isChecked} onChange={handleChange} />
         {name}
