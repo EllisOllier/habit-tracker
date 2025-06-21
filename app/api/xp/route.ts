@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import clientPromise from '../../../lib/mongodb'
 
 // GET Function
+// Needs to integrate userID when users are put into the database
 export async function GET() {
     try {
         const client = await clientPromise;

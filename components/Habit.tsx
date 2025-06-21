@@ -8,20 +8,25 @@ interface HabitProps {
   completed: boolean;
   xp: number;
   onDelete: (id: string) => void; // new prop for notifying parent
+  updateXp: () => void;
 }
 
-export default function Habit({ id, name, completed, onDelete }: HabitProps) {
+export default function Habit({ id, name, completed, onDelete, updateXp }: HabitProps) {
   const [isChecked, setIsChecked] = useState(completed);
 
   const handleChange = async () => {
     const newState = !isChecked;
     setIsChecked(newState);
-
-    await fetch(`/api/habits/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ completed: newState }),
-    });
+    try {
+        const res = await fetch(`api/habits/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ completed: newState }),
+        })
+        updateXp();
+    } catch(error){
+        console.error('Error updating habit: ', error);
+    }
   };
 
   const deleteHabit = async () => {
