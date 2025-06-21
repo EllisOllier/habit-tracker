@@ -3,10 +3,12 @@
 import { useState, useEffect } from 'react';
 import Habit from '@/components/Habit';
 import AddHabit from '@/components/AddHabit';
+import XPLevel from '@/components/XPLevel';
 
 export default function Home() {
   const [habits, setHabits] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [xp, setXp] = useState(10);
 
   const fetchHabits = async () => {
     try {
@@ -36,6 +38,7 @@ export default function Home() {
         <h1>Habit Tracker</h1>
       </header>
       <h2>Habits:</h2>
+      <XPLevel givenXp={xp}/>
       <AddHabit onHabitAdded={fetchHabits} />
       <div className="habit-container flex flex-col">
         {loading ? (
@@ -49,6 +52,7 @@ export default function Home() {
               id={habit._id}
               name={habit.habit}
               completed={habit.completed}
+              xp={habit.xp}
               onDelete={handleDelete}  // Pass delete handler here
             />
           ))

@@ -32,11 +32,12 @@ export default function AddHabit({ onHabitAdded }: { onHabitAdded: () => void })
   return (
     <div>
       <input
+      className=''
         type="text"
         value={habitName}
         onChange={(e) => setHabitName(e.target.value)}
         placeholder="New habit"
-        //disabled={loading}
+        disabled={loading}
       />
       <button onClick={addHabit} disabled={loading}>
         {loading ? 'Adding...' : 'Add Habit'}

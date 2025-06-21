@@ -6,6 +6,7 @@ interface HabitProps {
   id: string;
   name: string;
   completed: boolean;
+  xp: number;
   onDelete: (id: string) => void; // new prop for notifying parent
 }
 
@@ -32,10 +33,10 @@ export default function Habit({ id, name, completed, onDelete }: HabitProps) {
       onDelete(id); // Notify parent to update UI
     } catch (error) {
       console.error('Error deleting habit:', error);
-      // Optionally show user feedback here
     }
   };
 
+  // On change, trigger an xp push to the XPLevel component
   return (
     <div>
       <label>

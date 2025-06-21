@@ -37,8 +37,9 @@ export async function POST(req: Request) {
         const db = client.db('HabitTracker');
         const collection = db.collection('Habits'); // Add collection
 
-        let completed = false
-        const result = await collection.insertOne({ habit, completed, createdAt: new Date()});
+        let completed = false;
+        let xp = 20;
+        const result = await collection.insertOne({ habit, completed, xp, createdAt: new Date()});
         return NextResponse.json(
             { message : 'Successfully created habit' },
             { status : 201 }
