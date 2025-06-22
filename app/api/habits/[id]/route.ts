@@ -2,14 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ObjectId } from 'mongodb';
 import clientPromise from '@/lib/mongodb';
 
-type Context = {
-  params: {
-    id: string;
-  };
+// Safe context type for Vercel build
+type RouteContext = {
+  params: Record<string, string>;
 };
 
 // PATCH - Update habit status
-export async function PATCH(req: NextRequest, context: Context) {
+export async function PATCH(req: NextRequest, context: RouteContext) {
   try {
     const client = await clientPromise;
     const db = client.db('HabitTracker');
@@ -39,7 +38,7 @@ export async function PATCH(req: NextRequest, context: Context) {
 }
 
 // DELETE - Remove a habit
-export async function DELETE(req: NextRequest, context: Context) {
+export async function DELETE(req: NextRequest, context: RouteContext) {
   try {
     const client = await clientPromise;
     const db = client.db('HabitTracker');
