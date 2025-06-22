@@ -5,6 +5,7 @@ import clientPromise from '@/lib/mongodb';
 // PATCH - Update habit status
 export async function PATCH(
   req: NextRequest,
+  // Must be a promise otherwise it throws an error on vercel deployment
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
@@ -12,6 +13,7 @@ export async function PATCH(
     const db = client.db('HabitTracker');
     const collection = db.collection('Habits');
 
+    // Must await otherwise it throws an error on vercel deployment
     const habitId = (await params).id;
     const body = await req.json();
 
@@ -38,6 +40,7 @@ export async function PATCH(
 // DELETE - Remove a habit
 export async function DELETE(
   req: NextRequest,
+  // Must be a promise otherwise it throws an error on vercel deployment
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
@@ -45,6 +48,7 @@ export async function DELETE(
     const db = client.db('HabitTracker');
     const collection = db.collection('Habits');
 
+    // Must await otherwise it throws an error on vercel deployment
     const habitId = (await params).id;
 
     const result = await collection.deleteOne({ _id: new ObjectId(habitId) });
