@@ -7,6 +7,7 @@ export async function GET() {
         const client = await clientPromise;
         const db = client.db('HabitTracker');
         // Get all habits and put into an array
+        // TODO: Get habits by userID when implemented in database
         const habits = await db.collection('Habits').find({}).toArray(); 
 
         return NextResponse.json(habits);
