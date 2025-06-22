@@ -2,19 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ObjectId } from 'mongodb';
 import clientPromise from '@/lib/mongodb';
 
-// Safe context type for Vercel build
-type RouteContext = {
-  params: Record<string, string>;
-};
-
-// PATCH - Update habit status
-export async function PATCH(req: NextRequest, context: RouteContext) {
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: { habitId: string } }
+) {
   try {
     const client = await clientPromise;
     const db = client.db('HabitTracker');
     const collection = db.collection('Habits');
 
-    const habitId = context.params.id;
+    const habitId = params.habitId;
     const body = await req.json();
 
     if (typeof body.completed !== 'boolean') {
@@ -37,14 +34,16 @@ export async function PATCH(req: NextRequest, context: RouteContext) {
   }
 }
 
-// DELETE - Remove a habit
-export async function DELETE(req: NextRequest, context: RouteContext) {
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { habitId: string } }
+) {
   try {
     const client = await clientPromise;
     const db = client.db('HabitTracker');
     const collection = db.collection('Habits');
 
-    const habitId = context.params.id;
+    const habitId = params.habitId;
 
     const result = await collection.deleteOne({ _id: new ObjectId(habitId) });
 
