@@ -75,7 +75,7 @@ export default function Home() {
               completed={habit.completed}
               xp={habit.xp}
               onDelete={handleDelete}  // Pass delete handler here
-              updateXp={updateXp} // Trigger xp update onChange
+              updateXp={updateXp} // Trigger xp update
             />
           ))
         )}
