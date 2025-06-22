@@ -2,16 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ObjectId } from 'mongodb';
 import clientPromise from '@/lib/mongodb';
 
+// PATCH - Update habit status
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { habitId: string } }
+  { params }: { params: { id: string } }
 ) {
   try {
     const client = await clientPromise;
     const db = client.db('HabitTracker');
     const collection = db.collection('Habits');
 
-    const habitId = params.habitId;
+    const habitId = params.id;
     const body = await req.json();
 
     if (typeof body.completed !== 'boolean') {
@@ -34,16 +35,17 @@ export async function PATCH(
   }
 }
 
+// DELETE - Remove a habit
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { habitId: string } }
+  { params }: { params: { id: string } }
 ) {
   try {
     const client = await clientPromise;
     const db = client.db('HabitTracker');
     const collection = db.collection('Habits');
 
-    const habitId = params.habitId;
+    const habitId = params.id;
 
     const result = await collection.deleteOne({ _id: new ObjectId(habitId) });
 
