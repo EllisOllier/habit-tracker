@@ -5,14 +5,14 @@ import clientPromise from '@/lib/mongodb';
 // PATCH - Update habit status
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const client = await clientPromise;
     const db = client.db('HabitTracker');
     const collection = db.collection('Habits');
 
-    const habitId = params.id;
+    const habitId = (await params).id;
     const body = await req.json();
 
     if (typeof body.completed !== 'boolean') {
