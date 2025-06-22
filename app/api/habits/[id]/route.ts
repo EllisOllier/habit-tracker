@@ -2,11 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ObjectId } from 'mongodb';
 import clientPromise from '@/lib/mongodb';
 
+type Context = {
+  params: {
+    id: string;
+  };
+};
+
 // PATCH - Update habit status
-export async function PATCH(
-  req: NextRequest,
-  context: { params: { id: string } }
-) {
+export async function PATCH(req: NextRequest, context: Context) {
   try {
     const client = await clientPromise;
     const db = client.db('HabitTracker');
@@ -36,10 +39,7 @@ export async function PATCH(
 }
 
 // DELETE - Remove a habit
-export async function DELETE(
-  req: NextRequest,
-  context: { params: { id: string } }
-) {
+export async function DELETE(req: NextRequest, context: Context) {
   try {
     const client = await clientPromise;
     const db = client.db('HabitTracker');
