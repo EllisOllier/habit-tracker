@@ -1,18 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import { ObjectId } from 'mongodb';
 import clientPromise from '@/lib/mongodb';
 
+// PATCH - Update habit status
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
     const client = await clientPromise;
     const db = client.db('HabitTracker');
     const collection = db.collection('Habits');
 
-    const habitId = params.id; // Triggers error on server but doesnt effect application
+    const habitId = context.params.id;
     const body = await req.json();
 
     if (typeof body.completed !== 'boolean') {
@@ -37,15 +37,15 @@ export async function PATCH(
 
 // DELETE - Remove a habit
 export async function DELETE(
-  _req: NextRequest,
-  { params }: { params: { id: string } }
+  req: NextRequest,
+  context: { params: { id: string } }
 ) {
   try {
     const client = await clientPromise;
     const db = client.db('HabitTracker');
     const collection = db.collection('Habits');
 
-    const habitId = params.id;
+    const habitId = context.params.id;
 
     const result = await collection.deleteOne({ _id: new ObjectId(habitId) });
 
