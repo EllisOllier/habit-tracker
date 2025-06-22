@@ -38,14 +38,14 @@ export async function PATCH(
 // DELETE - Remove a habit
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const client = await clientPromise;
     const db = client.db('HabitTracker');
     const collection = db.collection('Habits');
 
-    const habitId = params.id;
+    const habitId = (await params).id;
 
     const result = await collection.deleteOne({ _id: new ObjectId(habitId) });
 
