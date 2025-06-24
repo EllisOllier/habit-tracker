@@ -24,11 +24,23 @@ export async function GET() {
 // req argument with type Request
 export async function POST(req: Request) {
     const body = await req.json();
-    const { habit } = body;
+    const { habit, completed, xp } = body;
 
     if(!habit){
         return NextResponse.json(
-            { error : "Habit is required" },
+            { error : "Habit Name is required" },
+            { status : 400 }
+        );
+    }
+    if(!completed){
+        return NextResponse.json(
+            { error : "Habit Completed is required" },
+            { status : 400 }
+        );
+    }
+    if(!xp){
+        return NextResponse.json(
+            { error : "Habit Difficulty is required" },
             { status : 400 }
         );
     }
@@ -38,8 +50,6 @@ export async function POST(req: Request) {
         const db = client.db('HabitTracker');
         const collection = db.collection('Habits'); // Add collection
 
-        let completed = false;
-        let xp = 20;
         const result = await collection.insertOne({ habit, completed, xp, createdAt: new Date()});
         return NextResponse.json(
             { message : 'Successfully created habit' },
