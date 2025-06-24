@@ -32,12 +32,6 @@ export async function POST(req: Request) {
             { status : 400 }
         );
     }
-    if(!completed){
-        return NextResponse.json(
-            { error : "Habit Completed is required" },
-            { status : 400 }
-        );
-    }
     if(!xp){
         return NextResponse.json(
             { error : "Habit Difficulty is required" },

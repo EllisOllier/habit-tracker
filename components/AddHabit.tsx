@@ -42,6 +42,7 @@ export default function AddHabit({
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         addHabit();
+        setShowForm(!showForm);
     }
 
     return (
