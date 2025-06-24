@@ -76,6 +76,7 @@ export default function Home() {
               xp={habit.xp}
               onDelete={handleDelete}  // Pass delete handler here
               updateXp={updateXp} // Trigger xp update
+              updateHabits={fetchHabits} // GET all habits when a habit is updated
             />
           ))
         )}
