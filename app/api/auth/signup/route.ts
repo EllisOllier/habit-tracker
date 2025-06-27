@@ -3,7 +3,6 @@ import clientPromise from '../../../../lib/mongodb'
 import bcrypt from 'bcrypt';
 
 // POST Function
-// req argument with type Request
 export async function POST(req: Request) {
 
     // Delcare body and expected fields
@@ -30,7 +29,6 @@ export async function POST(req: Request) {
             { status : 400 }
         );
     }
-
 
     // Create user and add it to the database
     try{

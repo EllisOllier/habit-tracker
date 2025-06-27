@@ -4,10 +4,11 @@ import bcrypt from "bcrypt";
 
 // POST function
 export async function POST(req: Request) {
+    // Delcare body and expected fields
     const body = await req.json();
     const { username, email, password } = body;
 
-    // Validate inputs
+    // Check for missing fields in body
     if (!username && !email) {
         return NextResponse.json(
             { error: "Username or Email is required" },
@@ -22,6 +23,7 @@ export async function POST(req: Request) {
         );
     }
 
+    // Check database for user with the fields in body
     try {
         const client = await clientPromise;
         const db = client.db("HabitTracker");
@@ -37,10 +39,11 @@ export async function POST(req: Request) {
                 { error: "Invalid username/email or password" },
                 { status: 401 }
             );
-        }
+        }   
 
-        console.log("Request password:", password);
-        console.log("Stored user password:", user.password);
+        // Check if passwords are undefined
+        // console.log("Request password:", password);
+        // console.log("Stored user password:", user.password);
 
         // Compare hashed password
         const passwordMatch = await bcrypt.compare(password, user.password);

@@ -6,6 +6,7 @@ export default function Login() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        // Add function to handle api/auth/login
         setShowForm(!showForm);
     }
 
