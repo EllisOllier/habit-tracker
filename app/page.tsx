@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Habit from '@/components/Habit';
 import AddHabit from '@/components/AddHabit';
 import XPLevel from '@/components/XPLevel';
-import Login from '@/components/Login';
+import Link from 'next/link';
 
 export default function Home() {
   const [habits, setHabits] = useState<any[]>([]);
@@ -53,7 +53,7 @@ export default function Home() {
     <div>
       <header>
         <h1>Habit Tracker</h1>
-        <Login />
+        <Link href={"/login"} className='text-gray-100 bg-green-400 p-2 rounded-md'>Login</Link>
       </header>
       <h2>Habits:</h2>
       {xpLoading ? (
