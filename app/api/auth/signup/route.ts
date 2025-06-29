@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     }
     if(!unhashedPassword){
         return NextResponse.json(
-            { error : "User password is required" },
+            { error : "User unhashed password is required" },
             { status : 400 }
         );
     }
