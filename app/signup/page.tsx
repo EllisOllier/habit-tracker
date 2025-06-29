@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
     const [loading, setLoading] = useState(false);
@@ -9,6 +10,8 @@ export default function Signup() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+
+    const router = useRouter();
 
     const createAccount = async () => {
         setLoading(true);
@@ -18,7 +21,7 @@ export default function Signup() {
             const res = await fetch("/api/auth/signup", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, username, password }),
+                body: JSON.stringify({ email, username, unhashedPassword : password }),
             });
 
             if (!res.ok) {
@@ -29,7 +32,10 @@ export default function Signup() {
 
             const data = await res.json();
             console.log("Signup success:", data);
-            // Optional: redirect or auto-login
+            // Add code here for sessions and storing login status (i think)
+
+            // Redirect to habit tracker page
+            router.push("/");
         } catch (err) {
             console.error("Unexpected error:", err);
             setError("Something went wrong. Please try again.");
