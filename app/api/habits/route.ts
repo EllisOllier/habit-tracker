@@ -21,7 +21,6 @@ export async function GET() {
 }
 
 // POST Function
-// req argument with type Request
 export async function POST(req: Request) {
     const body = await req.json();
     const { habit, completed, xp } = body;
